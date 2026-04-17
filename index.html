@@ -16,7 +16,7 @@
             background-color: #FBFBFA;
             color: #37352F;
         }
-        /* ヒーローセクションのフェードインアニメーション */
+        /* ヒーローセクションのアニメーション */
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
@@ -51,7 +51,7 @@
                 description: "農作業の現場感覚から、VBAによるデータ分析、AIによるシステム開発まで。誠実さを土台に、ビジネスの多角的な原理を統合し、最短ルートで成果を出す『知の構造』を再構築します。",
                 skills: ["AI Generative Integration", "Vercel / Next.js", "Python / VBA", "Data Analysis", "NLP (心理学)", "Business Strategy"],
                 googleBadge: {
-                    src: "google-ai-professional-certificate(1).png", // アップロードしたファイル名
+                    src: "google-ai-professional-certificate(1).png",
                     alt: "Google AI Professional Certificate"
                 },
                 otherBadges: [
@@ -92,11 +92,12 @@
                         </div>
                     </nav>
 
-                    <main className="max-w-4xl mx-auto px-6 pt-24 pb-24 relative z-10">
-                        {/* ヒーローセクション: バッジを中央上部に配置 */}
-                        <section id="home" className="mb-24 flex flex-col items-center text-center fade-in-up">
-                            {/* Google バッジを最上部に大きく配置 */}
-                            <div className="w-32 h-32 md:w-40 md:h-40 mb-8 p-3 bg-white rounded-full border-4 border-white shadow-xl ring-1 ring-[#E9E9E7] flex items-center justify-center">
+                    <main className="max-w-4xl mx-auto px-6 pt-32 pb-24 relative z-10">
+                        {/* ヒーローセクション: バッジを左側、テキストを右側に配置 */}
+                        <section id="home" className="mb-24 flex flex-col md:flex-row items-center md:items-start gap-10 md:text-left text-center fade-in-up">
+                            
+                            {/* 左側: Google バッジ (デスクトップでは固定、モバイルでは中央) */}
+                            <div className="flex-shrink-0 w-36 h-36 md:w-44 md:h-44 p-2 bg-white rounded-3xl border-2 border-white shadow-2xl ring-1 ring-[#E9E9E7] flex items-center justify-center transform hover:scale-105 transition-transform duration-300">
                                 <img 
                                     src={profile.googleBadge.src} 
                                     alt={profile.googleBadge.alt} 
@@ -105,31 +106,40 @@
                                 />
                             </div>
 
-                            <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight">
-                                {profile.name} <span className="text-3xl md:text-4xl font-normal text-gray-500">| {profile.role}</span>
-                            </h1>
-                            <p className="text-2xl md:text-3xl text-blue-600 font-bold mb-8 max-w-2xl fade-in-up delay-1">
-                                「{profile.tagline}」
-                            </p>
-                            
-                            {/* 他のバッジ */}
-                            <div className="flex flex-wrap gap-3 mb-10 justify-center fade-in-up delay-2">
-                                {profile.otherBadges.map((b, idx) => (
-                                    <span key={idx} className={`flex items-center gap-2 px-3 py-1.5 border rounded-full text-xs font-bold shadow-sm ${b.color || 'border-[#E9E9E7] bg-white'}`}>
-                                        <Icon name={b.icon} size={14} className="text-gray-500" />
-                                        {b.label}
+                            {/* 右側: プロフィールテキスト */}
+                            <div className="flex-1 flex flex-col justify-center">
+                                <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight">
+                                    {profile.name} 
+                                    <span className="text-2xl md:text-3xl font-normal text-gray-500 block mt-2">
+                                        {profile.role}
                                     </span>
-                                ))}
+                                </h1>
+                                <p className="text-xl md:text-2xl text-blue-600 font-bold mb-6 italic fade-in-up delay-1">
+                                    「{profile.tagline}」
+                                </p>
+                                
+                                {/* 他のバッジ (モバイルでは中央、デスクトップでは左寄せ) */}
+                                <div className="flex flex-wrap gap-2 mb-8 justify-center md:justify-start fade-in-up delay-2">
+                                    {profile.otherBadges.map((b, idx) => (
+                                        <span key={idx} className={`flex items-center gap-1.5 px-3 py-1 border rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm ${b.color || 'border-[#E9E9E7] bg-white'}`}>
+                                            <Icon name={b.icon} size={12} className="text-gray-500" />
+                                            {b.label}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
+                        </section>
 
-                            <p className="text-xl text-[#37352F] leading-relaxed max-w-3xl fade-in-up delay-2">
+                        {/* 説明文セクション */}
+                        <section className="mb-24 fade-in-up delay-2">
+                            <p className="text-xl md:text-2xl text-[#37352F] leading-relaxed max-w-3xl font-medium">
                                 {profile.description}
                             </p>
                         </section>
 
                         {/* 戦略の3本柱 */}
                         <section id="strategy" className="mb-24">
-                            <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Service Architecture</h2>
+                            <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8 border-b border-gray-100 pb-2">Service Architecture</h2>
                             <div className="grid md:grid-cols-3 gap-6">
                                 {pillars.map((p, i) => (
                                     <div key={i} className="bg-white p-8 rounded-2xl border border-[#E9E9E7] hover:border-blue-200 transition-all shadow-sm hover:shadow-md">
